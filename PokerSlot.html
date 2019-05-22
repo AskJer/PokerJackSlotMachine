@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		#wheel1DIV {
+			width: 59px;
+			height: 290px;
+			border: 1px solid black;
+			background-image: url('Wheel1.png');
+			background-position: 0px 0px;
+			background-size: 59px 813px;
+		}
+		#wheel1BTN {
+			width: 61px;
+			height: 29px;
+			visibility: hidden;
+		}
+		
+		#wheel2DIV {
+			width: 59px;
+			height: 290px;
+			border: 1px solid black;
+			background-image: url('Wheel2.png');
+			background-position: 0px 0px;
+			background-size: 59px 813px;
+		}
+		#wheel2BTN {
+			width: 61px;
+			height: 29px;
+			visibility: hidden;
+		}
+		
+		#wheel3DIV {
+			width: 59px;
+			height: 290px;
+			border: 1px solid black;
+			background-image: url('Wheel3.png');
+			background-position: 0px 0px;
+			background-size: 59px 813px;
+		}
+		#wheel3BTN {
+			width: 61px;
+			height: 29px;
+			visibility: hidden;
+		}
+		
+		#wheel4DIV {
+			width: 59px;
+			height: 290px;
+			border: 1px solid black;
+			background-image: url('Wheel4.png');
+			background-position: 0px 0px;
+			background-size: 59px 813px;
+		}
+		#wheel4BTN {
+			width: 61px;
+			height: 29px;
+			visibility: hidden;
+		}
+		
+		#wheel5DIV {
+			width: 59px;
+			height: 290px;
+			border: 1px solid black;
+			background-image: url('Wheel5.png');
+			background-position: 0px 0px;
+			background-size: 59px 813px;
+		}
+		#wheel5BTN {
+			width: 61px;
+			height: 29px;
+			visibility: hidden;
+		}
+		
+		#wheelsBTN {
+			width: 326px;
+			height: 58px;
+		}
+		
+		#cashOutBTN {
+			width: 326px;
+			height: 29px;
+			visibility: hidden;
+		}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>
+					<div id="wheel1DIV"></div>		
+					<input id="wheel1BTN" type="button" value="-DRAW-" onclick="clickedButtonWheel1()" />
+				</td>
+				<td>
+					<div id="wheel2DIV"></div>		
+					<input id="wheel2BTN" type="button" value="-DRAW-" onclick="clickedButtonWheel2()" />
+				</td>
+				<td>
+					<div id="wheel3DIV"></div>		
+					<input id="wheel3BTN" type="button" value="-DRAW-" onclick="clickedButtonWheel3()" />
+				</td>
+				<td>
+					<div id="wheel4DIV"></div>		
+					<input id="wheel4BTN" type="button" value="-DRAW-" onclick="clickedButtonWheel4()" />
+				</td>
+				<td>
+					<div id="wheel5DIV"></div>		
+					<input id="wheel5BTN" type="button" value="-DRAW-" onclick="clickedButtonWheel5()" />
+				</td>
+			</tr>
+		</table><br />
+		<input id="wheelsBTN" type="button" value="- D.E.A.L -" onclick="clickedButtonWheels()" /><br />
+		<input id="cashOutBTN" type="button" value="- CASH - OUT -" onclick="clickedButtonCashOut()" />
+
+		<script>
+		function clickedButtonWheels(){
+			document.getElementById("wheelsBTN").style.visibility = "hidden";
+			document.getElementById("cashOutBTN").style.visibility = "visible";		
+			clickedButtonWheel1();
+			clickedButtonWheel2();
+			clickedButtonWheel3();
+			clickedButtonWheel4();
+			clickedButtonWheel5();
+			document.getElementById("wheel1BTN").style.visibility = "visible";
+			document.getElementById("wheel2BTN").style.visibility = "visible";
+			document.getElementById("wheel3BTN").style.visibility = "visible";
+			document.getElementById("wheel4BTN").style.visibility = "visible";
+			document.getElementById("wheel5BTN").style.visibility = "visible";
+		}
+		
+		function clickedButtonCashOut(){
+			document.getElementById("cashOutBTN").style.visibility = "hidden";		
+			document.getElementById("wheel1BTN").style.visibility = "hidden";
+			document.getElementById("wheel2BTN").style.visibility = "hidden";
+			document.getElementById("wheel3BTN").style.visibility = "hidden";
+			document.getElementById("wheel4BTN").style.visibility = "hidden";
+			document.getElementById("wheel5BTN").style.visibility = "hidden";
+			document.getElementById("wheelsBTN").style.visibility = "visible";		
+		}
+		
+		var toWhatPixelWheel1 = 0;
+		var toWhatPosWheel1 = 0;
+		var currentSetPixelWheel1 = 0;
+		var currentSetPosWheel1 = 0;
+		var spinRateWheel1 = Math.floor(Math.random() * 56);
+		var fastEnoughWheel1 = false;
+		var wheelIntervalWheel1 = setInterval(animateSpinWheel1, 1);
+		clearInterval("wheelIntervalWheel1");
+		
+		function clickedButtonWheel1(){
+			fastEnoughWheel1 = false;
+			spinRateWheel1 = Math.floor(Math.random() * 56);
+			wheelIntervalWheel1 = setInterval(animateSpinWheel1, 10);
+			document.getElementById("wheel1BTN").style.visibility = "hidden";
+		}
+		
+		function setWheelPixelWheel1(toWhatPixelWheel1){
+			toWhatPixelWheel1 = toWhatPixelWheel1 % 812;
+			document.getElementById("wheel1DIV").style.backgroundPosition = "0px " + toWhatPixelWheel1 + "px";
+			currentSetPixelWheel1 = toWhatPixelWheel1;
+		}
+		function setWheelPosWheel1(toWhatPosWheel1){
+			toWhatPosWheel1 = Math.floor(toWhatPosWheel1 % 13);
+			document.getElementById("wheel1DIV").style.backgroundPosition = "0px " + toWhatPosWheel1 * 58 + "px";
+			currentSetPosWheel1 = toWhatPosWheel1;
+		}
+		
+		function animateSpinWheel1(){
+			if (fastEnoughWheel1){ spinRateWheel1--; } else { spinRateWheel1++; }
+			toWhatPixelWheel1 = currentSetPixelWheel1 + spinRateWheel1;
+			setWheelPixelWheel1(toWhatPixelWheel1);
+			if (spinRateWheel1 >= 58){ fastEnoughWheel1 = true; }
+			if (spinRateWheel1 <= 0){
+			//	if (currentSetPixelWheel1 % 58 <= 14){ spinRateWheel1 = -1; } else { spinRateWheel1 = 1; }
+				spinRateWheel1 = 1;
+				toWhatPixelWheel1 = currentSetPixelWheel1 + spinRateWheel1;
+				setWheelPixelWheel1(toWhatPixelWheel1);
+				clearInterval(wheelIntervalWheel1);
+				wheelIntervalWheel1 = setInterval(animateSpinWheel1, 1);
+				if (currentSetPixelWheel1 % 58 == 0){ clearInterval(wheelIntervalWheel1); }
+			}
+		}
+
+		var toWhatPixelWheel2 = 0;
+		var toWhatPosWheel2 = 0;
+		var currentSetPixelWheel2 = 0;
+		var currentSetPosWheel2 = 0;
+		var spinRateWheel2 = Math.floor(Math.random() * 56);
+		var fastEnoughWheel2 = false;
+		var wheelIntervalWheel2 = setInterval(animateSpinWheel2, 1);
+		clearInterval("wheelIntervalWheel2");
+		
+		function clickedButtonWheel2(){
+			fastEnoughWheel2 = false;
+			spinRateWheel2 = Math.floor(Math.random() * 56);
+			wheelIntervalWheel2 = setInterval(animateSpinWheel2, 10);
+			document.getElementById("wheel2BTN").style.visibility = "hidden";
+		}
+		
+		function setWheelPixelWheel2(toWhatPixelWheel2){
+			toWhatPixelWheel2 = toWhatPixelWheel2 % 812;
+			document.getElementById("wheel2DIV").style.backgroundPosition = "0px " + toWhatPixelWheel2 + "px";
+			currentSetPixelWheel2 = toWhatPixelWheel2;
+		}
+		function setWheelPosWheel2(toWhatPosWheel2){
+			toWhatPosWheel2 = Math.floor(toWhatPosWheel2 % 13);
+			document.getElementById("wheel2DIV").style.backgroundPosition = "0px " + toWhatPosWheel2 * 58 + "px";
+			currentSetPosWheel2 = toWhatPosWheel2;
+		}
+		
+		function animateSpinWheel2(){
+			if (fastEnoughWheel2){ spinRateWheel2--; } else { spinRateWheel2++; }
+			toWhatPixelWheel2 = currentSetPixelWheel2 + spinRateWheel2;
+			setWheelPixelWheel2(toWhatPixelWheel2);
+			if (spinRateWheel2 >= 58){ fastEnoughWheel2 = true; }
+			if (spinRateWheel2 <= 0){
+			//	if (currentSetPixelWheel2 % 58 <= 30){ spinRateWheel2 = -1; } else { spinRateWheel2 = 1; }
+				spinRateWheel2 = 1;
+				toWhatPixelWheel2 = currentSetPixelWheel2 + spinRateWheel2;
+				setWheelPixelWheel2(toWhatPixelWheel2);
+				clearInterval(wheelIntervalWheel2);
+				wheelIntervalWheel2 = setInterval(animateSpinWheel2, 1);
+				if (currentSetPixelWheel2 % 58 == 0){ clearInterval(wheelIntervalWheel2); }
+			}
+		}
+		
+		var toWhatPixelWheel3 = 0;
+		var toWhatPosWheel3 = 0;
+		var currentSetPixelWheel3 = 0;
+		var currentSetPosWheel3 = 0;
+		var spinRateWheel3 = Math.floor(Math.random() * 56);
+		var fastEnoughWheel3 = false;
+		var wheelIntervalWheel3 = setInterval(animateSpinWheel3, 1);
+		clearInterval("wheelIntervalWheel3");
+		
+		function clickedButtonWheel3(){
+			fastEnoughWheel3 = false;
+			spinRateWheel3 = Math.floor(Math.random() * 56);
+			wheelIntervalWheel3 = setInterval(animateSpinWheel3, 10);
+			document.getElementById("wheel3BTN").style.visibility = "hidden";
+		}
+		
+		function setWheelPixelWheel3(toWhatPixelWheel3){
+			toWhatPixelWheel3 = toWhatPixelWheel3 % 812;
+			document.getElementById("wheel3DIV").style.backgroundPosition = "0px " + toWhatPixelWheel3 + "px";
+			currentSetPixelWheel3 = toWhatPixelWheel3;
+		}
+		function setWheelPosWheel3(toWhatPosWheel3){
+			toWhatPosWheel3 = Math.floor(toWhatPosWheel3 % 13);
+			document.getElementById("wheel3DIV").style.backgroundPosition = "0px " + toWhatPosWheel3 * 58 + "px";
+			currentSetPosWheel3 = toWhatPosWheel3;
+		}
+		
+		function animateSpinWheel3(){
+			if (fastEnoughWheel3){ spinRateWheel3--; } else { spinRateWheel3++; }
+			toWhatPixelWheel3 = currentSetPixelWheel3 + spinRateWheel3;
+			setWheelPixelWheel3(toWhatPixelWheel3);
+			if (spinRateWheel3 >= 58){ fastEnoughWheel3 = true; }
+			if (spinRateWheel3 <= 0){
+			//	if (currentSetPixelWheel3 % 58 <= 30){ spinRateWheel3 = -1; } else { spinRateWheel3 = 1; }
+				spinRateWheel3 = 1;
+				toWhatPixelWheel3 = currentSetPixelWheel3 + spinRateWheel3;
+				setWheelPixelWheel3(toWhatPixelWheel3);
+				clearInterval(wheelIntervalWheel3);
+				wheelIntervalWheel3 = setInterval(animateSpinWheel3, 1);
+				if (currentSetPixelWheel3 % 58 == 0){ clearInterval(wheelIntervalWheel3); }
+			}
+		}
+		
+		function waitMiliseconds(howLongToWait){
+				var startDate = new Date();
+				var startTime = startDate.getTime();
+				var currentDate = new Date();
+				var currentTime = currentDate.getTime();
+				while (currentTime - startTime <= howLongToWait){
+					var currentDate = new Date();
+					var currentTime = currentDate.getTime();
+				}
+		}
+		
+		var toWhatPixelWheel4 = 0;
+		var toWhatPosWheel4 = 0;
+		var currentSetPixelWheel4 = 0;
+		var currentSetPosWheel4 = 0;
+		var spinRateWheel4 = Math.floor(Math.random() * 56);
+		var fastEnoughWheel4 = false;
+		var wheelIntervalWheel4 = setInterval(animateSpinWheel4, 1);
+		clearInterval("wheelIntervalWheel4");
+		
+		function clickedButtonWheel4(){
+			fastEnoughWheel4 = false;
+			spinRateWheel4 = Math.floor(Math.random() * 56);
+			wheelIntervalWheel4 = setInterval(animateSpinWheel4, 10);
+			document.getElementById("wheel4BTN").style.visibility = "hidden";
+		}
+		
+		function setWheelPixelWheel4(toWhatPixelWheel4){
+			toWhatPixelWheel4 = toWhatPixelWheel4 % 812;
+			document.getElementById("wheel4DIV").style.backgroundPosition = "0px " + toWhatPixelWheel4 + "px";
+			currentSetPixelWheel4 = toWhatPixelWheel4;
+		}
+		function setWheelPosWheel4(toWhatPosWheel4){
+			toWhatPosWheel4 = Math.floor(toWhatPosWheel4 % 13);
+			document.getElementById("wheel4DIV").style.backgroundPosition = "0px " + toWhatPosWheel4 * 58 + "px";
+			currentSetPosWheel4 = toWhatPosWheel4;
+		}
+		
+		function animateSpinWheel4(){
+			if (fastEnoughWheel4){ spinRateWheel4--; } else { spinRateWheel4++; }
+			toWhatPixelWheel4 = currentSetPixelWheel4 + spinRateWheel4;
+			setWheelPixelWheel4(toWhatPixelWheel4);
+			if (spinRateWheel4 >= 58){ fastEnoughWheel4 = true; }
+			if (spinRateWheel4 <= 0){
+			//	if (currentSetPixelWheel4 % 58 <= 30){ spinRateWheel4 = -1; } else { spinRateWheel4 = 1; }
+				spinRateWheel4 = 1;
+				toWhatPixelWheel4 = currentSetPixelWheel4 + spinRateWheel4;
+				setWheelPixelWheel4(toWhatPixelWheel4);
+				clearInterval(wheelIntervalWheel4);
+				wheelIntervalWheel4 = setInterval(animateSpinWheel4, 1);
+				if (currentSetPixelWheel4 % 58 == 0){ clearInterval(wheelIntervalWheel4); }
+			}
+		}
+		
+		var toWhatPixelWheel5 = 0;
+		var toWhatPosWheel5 = 0;
+		var currentSetPixelWheel5 = 0;
+		var currentSetPosWheel5 = 0;
+		var spinRateWheel5 = Math.floor(Math.random() * 56);
+		var fastEnoughWheel5 = false;
+		var wheelIntervalWheel5 = setInterval(animateSpinWheel5, 1);
+		clearInterval("wheelIntervalWheel5");
+		
+		function clickedButtonWheel5(){
+			fastEnoughWheel5 = false;
+			spinRateWheel5 = Math.floor(Math.random() * 56);
+			wheelIntervalWheel5 = setInterval(animateSpinWheel5, 10);
+			document.getElementById("wheel5BTN").style.visibility = "hidden";
+		}
+		
+		function setWheelPixelWheel5(toWhatPixelWheel5){
+			toWhatPixelWheel5 = toWhatPixelWheel5 % 812;
+			document.getElementById("wheel5DIV").style.backgroundPosition = "0px " + toWhatPixelWheel5 + "px";
+			currentSetPixelWheel5 = toWhatPixelWheel5;
+		}
+		function setWheelPosWheel5(toWhatPosWheel5){
+			toWhatPosWheel5 = Math.floor(toWhatPosWheel5 % 13);
+			document.getElementById("wheel5DIV").style.backgroundPosition = "0px " + toWhatPosWheel5 * 58 + "px";
+			currentSetPosWheel5 = toWhatPosWheel5;
+		}
+		
+		function animateSpinWheel5(){
+			if (fastEnoughWheel5){ spinRateWheel5--; } else { spinRateWheel5++; }
+			toWhatPixelWheel5 = currentSetPixelWheel5 + spinRateWheel5;
+			setWheelPixelWheel5(toWhatPixelWheel5);
+			if (spinRateWheel5 >= 58){ fastEnoughWheel5 = true; }
+			if (spinRateWheel5 <= 0){
+			//	if (currentSetPixelWheel5 % 58 <= 30){ spinRateWheel5 = -1; } else { spinRateWheel5 = 1; }
+				spinRateWheel5 = 1;
+				toWhatPixelWheel5 = currentSetPixelWheel5 + spinRateWheel5;
+				setWheelPixelWheel5(toWhatPixelWheel5);
+				clearInterval(wheelIntervalWheel5);
+				wheelIntervalWheel5 = setInterval(animateSpinWheel5, 1);
+				if (currentSetPixelWheel5 % 58 == 0){ clearInterval(wheelIntervalWheel5); }
+			}
+		}
+		
+		function waitMiliseconds(howLongToWait){
+				var startDate = new Date();
+				var startTime = startDate.getTime();
+				var currentDate = new Date();
+				var currentTime = currentDate.getTime();
+				while (currentTime - startTime <= howLongToWait){
+					var currentDate = new Date();
+					var currentTime = currentDate.getTime();
+				}
+		}
+		</script>
+	</body>
+</html>

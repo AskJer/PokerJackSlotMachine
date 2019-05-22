@@ -1,0 +1,28 @@
+How Many of a Kind by Value
+	Low Card (marks the low card value toward Straight hands
+
+	High Card (none of a kind by value, difference from lowest to highest, by value, is greater than 4)
+	
+	A Pair (two cards values match, by value, other card values differ)
+	
+	Two Pair (two card values match, by value, twice, other card value differs)
+	
+	Three of a Kind (three card values match, other two card values differ)
+	
+	Straight (no card values match, but difference from lowest to highest, by value, is exactly 4)
+	
+	
+		How Many of a Kind by Type
+
+			Flush (all five card types amatch, difference from lowest to highest, by value, is greater than 4)
+		
+		
+	Full House (Three of a Kind and a differing Pair, by value, not type)
+	
+	Four of a Kind (four card values match, other card value differs)
+	
+	Straight Flush (all five card types match, no card values match, but difference from lowest to highest, by value, is exactly 4)
+	
+	Royal Flush (largest, Straight Flush, by value, and highest hand possible without wild cards in play)
+	
+	Five of a Kind (all five card values match, by applying a wild card as fifth matching value. Highest possible hand is five Aces)

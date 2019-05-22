@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			table {
+			  border: 1px solid black;
+			  text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<input id="spinWheels" type="button" value="SPIN" onclick="populateTable()" style="position:absolute; height:60px; width:70px; top:327px; left:192px; z-index:1" />
+		<table style="visibility:hidden;">
+			<tr>
+				<td>.</td>
+				<td><div id="w1-00"></div></td>
+				<td>.</td>
+				<td><div id="w2-00"></div></td>
+				<td>.</td>
+				<td><div id="w3-00"></div></td>
+				<td>.</td>
+				<td><div id="w4-00"></div></td>
+				<td>.</td>
+				<td><div id="w5-00"></div></td>
+				<td>.</td>
+			</tr>
+			<tr>
+				<td>.</td>
+				<td><div id="w1-01"></div></td>
+				<td>.</td>
+				<td><div id="w2-01"></div></td>
+				<td>.</td>
+				<td><div id="w3-01"></div></td>
+				<td>.</td>
+				<td><div id="w4-01"></div></td>
+				<td>.</td>
+				<td><div id="w5-01"></div></td>
+				<td>.</td>
+			</tr>
+			<tr>
+				<td>.</td>
+				<td><div id="w1-02"></div></td>
+				<td>.</td>
+				<td><div id="w2-02"></div></td>
+				<td>.</td>
+				<td><div id="w3-02"></div></td>
+				<td>.</td>
+				<td><div id="w4-02"></div></td>
+				<td>.</td>
+				<td><div id="w5-02"></div></td>
+				<td>.</td>
+			</tr>
+		</table>
+		<table style="position:absolute; top:0px; left:0px; z-index:0">
+			<tr>
+				<td style="border: 1px solid black; background-color:green;">..\..</td>
+				<td><div id="w1-03"></div></td>
+				<td>.</td>
+				<td><div id="w2-03"></div></td>
+				<td>.</td>
+				<td><div id="w3-03"></div></td>
+				<td>.</td>
+				<td><div id="w4-03"></div></td>
+				<td>.</td>
+				<td><div id="w5-03"></div></td>
+				<td style="border: 1px solid black; background-color:green;">../..</td>
+				<td><div id="result-1"></div></td>
+			</tr>
+			<tr style="background-color:green;">
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w1-04" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w2-04" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w3-04" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w4-04" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w5-04" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td><div id="result-2"></div></td>
+			</tr>
+			<tr style="background-color:green;">
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w1-05" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w2-05" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w3-05" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w4-05" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w5-05" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td><div id="result-3"></div></td>
+			</tr>
+			<tr style="background-color:green;">
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w1-06" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w2-06" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w3-06" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w4-06" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w5-06" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td><div id="result-4"></div></td>
+			</tr>
+			<tr style="background-color:green;">
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w1-07" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w2-07" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w3-07" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w4-07" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w5-07" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td><div id="result-5"></div></td>
+			</tr>
+			<tr style="background-color:green;">
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w1-08" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w2-08" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w3-08" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w4-08" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td style="border: 1px solid black;"><div id="w5-08" style="background-color:#8fdf8f;"></div></td>
+				<td>=</td>
+				<td><div id="result-6"></div></td>
+			</tr>
+			<tr>
+				<td style="border: 1px solid black; background-color:green;">../..</td>
+				<td><div id="w1-09"></div></td>
+				<td>.</td>
+				<td><div id="w2-09"></div></td>
+				<td>.</td>
+				<td><div id="w3-09"></div></td>
+				<td>.</td>
+				<td><div id="w4-09"></div></td>
+				<td>.</td>
+				<td><div id="w5-09"></div></td>
+				<td style="border: 1px solid black; background-color:green;">..\..</td>
+				<td><div id="result-7"></div></td>
+			</tr>
+		</table>
+
+		<table style="visibility:hidden;">
+			<tr>
+				<td>.</td>
+				<td><div id="w1-10"></div></td>
+				<td>.</td>
+				<td><div id="w2-10"></div></td>
+				<td>.</td>
+				<td><div id="w3-10"></div></td>
+				<td>.</td>
+				<td><div id="w4-10"></div></td>
+				<td>.</td>
+				<td><div id="w5-10"></div></td>
+				<td>.</td>
+			</tr>
+			<tr>
+				<td>.</td>
+				<td><div id="w1-11"></div></td>
+				<td>.</td>
+				<td><div id="w2-11"></div></td>
+				<td>.</td>
+				<td><div id="w3-11"></div></td>
+				<td>.</td>
+				<td><div id="w4-11"></div></td>
+				<td>.</td>
+				<td><div id="w5-11"></div></td>
+				<td>.</td>
+			</tr>
+			<tr>
+				<td>.</td>
+				<td><div id="w1-12"></div></td>
+				<td>.</td>
+				<td><div id="w2-12"></div></td>
+				<td>.</td>
+				<td><div id="w3-12"></div></td>
+				<td>.</td>
+				<td><div id="w4-12"></div></td>
+				<td>.</td>
+				<td><div id="w5-12"></div></td>
+				<td>.</td>
+			</tr>
+			<tr>
+				<td>.</td>
+				<td><div id="w1-13"></div></td>
+				<td>.</td>
+				<td><div id="w2-13"></div></td>
+				<td>.</td>
+				<td><div id="w3-13"></div></td>
+				<td>.</td>
+				<td><div id="w4-13"></div></td>
+				<td>.</td>
+				<td><div id="w5-13"></div></td>
+				<td>.</td>
+			</tr>
+		</table>
+		<div id="imagesPreload" style="visibility:hidden;">
+			<img src="AH.png" /><img src="2H.png" /><img src="3H.png" /><img src="4H.png" /><img src="5H.png" />
+			<img src="6H.png" /><img src="7H.png" /><img src="8H.png" /><img src="9H.png" /><img src="TH.png" />
+			<img src="JH.png" /><img src="QH.png" /><img src="KH.png" /><img src="joker.png" />
+			<img src="AS.png" /><img src="2S.png" /><img src="3S.png" /><img src="4S.png" /><img src="5S.png" />
+			<img src="6S.png" /><img src="7S.png" /><img src="8S.png" /><img src="9S.png" /><img src="TS.png" />
+			<img src="JS.png" /><img src="QS.png" /><img src="KS.png" />
+			<img src="AD.png" /><img src="2D.png" /><img src="3D.png" /><img src="4D.png" /><img src="5D.png" />
+			<img src="6D.png" /><img src="7D.png" /><img src="8D.png" /><img src="9D.png" /><img src="TD.png" />
+			<img src="JD.png" /><img src="QD.png" /><img src="KD.png" /><img src="lemon.png" />
+			<img src="AC.png" /><img src="2C.png" /><img src="3C.png" /><img src="4C.png" /><img src="5C.png" />
+			<img src="6C.png" /><img src="7C.png" /><img src="8C.png" /><img src="9C.png" /><img src="TC.png" />
+			<img src="JC.png" /><img src="QC.png" /><img src="KC.png" /><img src="cherry.png" />
+		</div>
+		<script>
+			var w1 = [
+			  "5D","2H","TD","7H","CH","JH","4C","AS","9C","6S","KC","CH","CH","LE"
+			];
+			var w2 = [
+			  "2S","AD","TC","3H","7S","6D","J0","8H","JS","LE","CH","QH","LE","5C"
+			];
+			var w3 = [
+			  "9H","3S","QS","2D","JD","6C","CH","4H","KH","8S","LE","7D","AC","LE"
+			];
+			var w4 = [
+			  "5H","TH","J0","4S","9S","KS","LE","3D","8D","QD","2C","7C","JC","CH"
+			];
+			var w5 = [
+			  "4D","AH","9D","6H","KD","LE","3C","5S","8C","TS","QC","CH","CH","LE"
+			];
+			
+			var hand = [];	// define hand as a 2 dimentional 8x6 array of hands by cards, including unused index[0] of each dimention)
+			hand.length = 8; // 7 hands (includes unused index[0], thus length = 8)
+			for (i = 0; i < hand.length; i++) {
+				hand[i] = []; // each hand is an array of cards.
+				hand[i].length = 6; // 5 cards for each row (includes unused index[0], thus length = 6)
+			}
+
+			var lastSpin = [0,0,0,0,0];
+			var lastW1 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var lastW2 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var lastW3 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var lastW4 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var lastW5 = [
+			  "","","","","","","","","","","","","",""
+			];
+			
+			var startW1 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var startW2 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var startW3 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var startW4 = [
+			  "","","","","","","","","","","","","",""
+			];
+			var startW5 = [
+			  "","","","","","","","","","","","","",""
+			];
+			
+			var i;
+			
+			var cardVal = [ [],[] ];
+			cardVal.length = 8; // 7 hands;
+			for (i = 0; i < cardVal.length; i++) {
+				cardVal[i] = [];
+				cardVal[i].length = 6; // 5 cards for each row.
+			}
+
+			var cardTyp = [ [],[] ];
+			cardTyp.length = 8; // 7 hands;
+			for (i = 0; i < cardTyp.length; i++) {
+				cardTyp[i] = [];
+				cardTyp[i].length = 6; // 5 cards for each row.
+			}
+			
+			var handRanks = [ [],[] ];
+			handRanks.length = 8; // 7 hands;
+			for (i = 0; i < handRanks.length; i++) {
+				handRanks[i] = [];
+				handRanks[i].length = 15; // 15 hand ranks for each row.
+			}
+
+			function populateTable(){
+				document.getElementById("spinWheels").style.visibility = "hidden";
+				var spinButtonHidden = setTimeout(showSpinWheelsButton, 3000);
+				startW1 = w1;
+				startW2 = w2;
+				startW3 = w3;
+				startW4 = w4;
+				startW5 = w5;
+					lastW1 = w1;
+					lastW2 = w2;
+					lastW3 = w3;
+					lastW4 = w4;
+					lastW5 = w5;
+					while (w1 == lastW1 || 
+							w2 == lastW2 || 
+							w3 == lastW3 || 
+							w4 == lastW4 || 
+							w5 == lastW5){
+						rollWheels();
+					}
+				if (w1 == startW1 || 
+						w2 == startW2 || 
+						w3 == startW3 || 
+						w4 == startW4 || 
+						w5 == startW5){
+					alert("WTF");
+				}
+				
+				var column = 1;
+				var row = 0;
+				var strRow = "";
+				while(column <= 5){
+					while(row <=13){
+						if (row <= 9){
+							strRow = "0" + row;
+						} else {
+							strRow = row;
+						}
+						
+						divID = "w" + column + "-" + strRow;
+						// alert(divID);
+						if (column == 1){ document.getElementById(divID).innerHTML=w1[row]; }
+						if (column == 2){ document.getElementById(divID).innerHTML=w2[row]; }
+						if (column == 3){ document.getElementById(divID).innerHTML=w3[row]; }
+						if (column == 4){ document.getElementById(divID).innerHTML=w4[row]; }
+						if (column == 5){ document.getElementById(divID).innerHTML=w5[row]; }
+						row++
+					}
+					column++;
+					row = 0;
+				}
+				startW1 = w1;
+				startW2 = w2;
+				startW3 = w3;
+				startW4 = w4;
+				startW5 = w5;
+
+				w1 = lastW1;
+				w2 = lastW2;
+				w3 = lastW3;
+				w4 = lastW4;
+				w5 = lastW5;
+				var paintCount = 0;
+				while (paintCount <= 14){
+					var tmpWV = [ w1[13], w2[13], w3[13], w4[13], w5[13] ];
+					for (i = 13; i >= 1; i--){
+						w1[i] = w1[i - 1];
+						w2[i] = w2[i - 1];
+						w3[i] = w3[i - 1];
+						w4[i] = w4[i - 1];
+						w5[i] = w5[i - 1];
+					}
+					w1[0] = tmpWV[0];
+					w2[0] = tmpWV[1];
+					w3[0] = tmpWV[2];
+					w4[0] = tmpWV[3];
+					w5[0] = tmpWV[4];
+					paintView();
+					sleep(500);
+					paintCount++
+				}
+				judgeHands();
+				clearTimeout(spinButtonHidden);
+				showSpinWheelsButton();
+			}
+			
+			function sleep(milliseconds) {
+				var start = new Date().getTime();
+				for (var i = 0; i < 1e7; i++) {
+					if ((new Date().getTime() - start) > milliseconds){
+					break;
+				}
+				}
+			}
+			
+			function showSpinWheelsButton(){
+				document.getElementById("spinWheels").style.visibility = "visible";
+			}
+			
+			function rollWheels(){
+				var rndNum = [
+					Math.floor(Math.random() * 13) +1,
+					Math.floor(Math.random() * 13) +1,
+					Math.floor(Math.random() * 13) +1,
+					Math.floor(Math.random() * 13) +1,
+					Math.floor(Math.random() * 13) +1
+					];
+				var tmpWheel_1 = [
+					"","","","","","","","","","","","",""
+				];
+				var tmpWheel_2 = [
+					"","","","","","","","","","","","",""
+				];
+				var tmpWheel_3 = [
+					"","","","","","","","","","","","",""
+				];
+				var tmpWheel_4 = [
+					"","","","","","","","","","","","",""
+				];
+				var tmpWheel_5 = [
+					"","","","","","","","","","","","",""
+				];
+				var count = 0;
+				
+				while (rndNum[0] % 14 == lastSpin[0] % 14){
+					rndNum[0] = Math.floor(Math.random() * 14);
+				}
+				while (rndNum[1] % 14 == lastSpin[1] % 14){
+					rndNum[1] = Math.floor(Math.random() * 14);
+				}
+				while (rndNum[2] % 14 == lastSpin[2] % 14){
+					rndNum[2] = Math.floor(Math.random() * 14);
+				}
+				while (rndNum[3] % 14 == lastSpin[3] % 14){
+					rndNum[3] = Math.floor(Math.random() * 14);
+				}
+				while (rndNum[4] % 14 == lastSpin[4] % 14){
+					rndNum[4] = Math.floor(Math.random() * 14);
+				}
+				
+				while (count <= 13){
+					var tmpWindex = [
+						(count + rndNum[0]) % 14,
+						(count + rndNum[1]) % 14,
+						(count + rndNum[2]) % 14,
+						(count + rndNum[3]) % 14,
+						(count + rndNum[4]) % 14
+						];
+						tmpWheel_1[count] = w1[tmpWindex[0]];
+						tmpWheel_2[count] = w2[tmpWindex[1]];
+						tmpWheel_3[count] = w3[tmpWindex[2]];
+						tmpWheel_4[count] = w4[tmpWindex[3]];
+						tmpWheel_5[count] = w5[tmpWindex[4]];
+				count++;
+				}
+				
+				w1 = tmpWheel_1;
+				w2 = tmpWheel_2;
+				w3 = tmpWheel_3;
+				w4 = tmpWheel_4;
+				w5 = tmpWheel_5;
+				lastSpin = rndNum;
+			}
+			
+			function paintView(){
+				var row;
+				var col;
+				var divID;
+				var whatsThere;
+				var whatPic;
+				
+				row=1;
+				while (row <= 5){
+					
+					col=1;
+					while (col <= 5){
+						divID = "w" + col + "-0" + (row + 3);
+						if (col == 1){ whatsThere = w1[row +3]; }
+						if (col == 2){ whatsThere = w2[row +3]; }
+						if (col == 3){ whatsThere = w3[row +3]; }
+						if (col == 4){ whatsThere = w4[row +3]; }
+						if (col == 5){ whatsThere = w5[row +3]; }
+						whatPic = whatsThere + ".png"
+						if (whatsThere == "LE"){
+							whatPic = "lemon.png";
+						}
+						if (whatsThere == "CH"){
+							whatPic = "cherry.png";
+						}
+						if (whatsThere == "J0"){
+							whatPic = "joker.png";
+						}
+						
+						document.getElementById(divID).innerHTML = "<img src='" + whatPic + "' height='50px' width='60px' />";
+					col++
+					}
+					divID = "w" + row + "-03"
+					document.getElementById(divID).style = "visibility:hidden;"
+					divID = "w" + row + "-09"
+					document.getElementById(divID).style = "visibility:hidden;"
+				row++
+				}
+			}
+			
+			function readHands(){
+				var count = 1;
+				while (count <= 5){
+					if (count == 1){
+						hand[1][count] = w1[8];
+						hand[2][count] = w1[4];
+						hand[3][count] = w1[5];
+						hand[4][count] = w1[6];
+						hand[5][count] = w1[7];
+						hand[6][count] = w1[8];
+						hand[7][count] = w1[4];
+					}
+					if (count == 2){
+						hand[1][count] = w2[7];
+						hand[2][count] = w2[4];
+						hand[3][count] = w2[5];
+						hand[4][count] = w2[6];
+						hand[5][count] = w2[7];
+						hand[6][count] = w2[8];
+						hand[7][count] = w2[4];
+					}
+					if (count == 3){
+						hand[1][count] = w3[6];
+						hand[2][count] = w3[4];
+						hand[3][count] = w3[5];
+						hand[4][count] = w3[6];
+						hand[5][count] = w3[7];
+						hand[6][count] = w3[8];
+						hand[7][count] = w3[6];
+					}
+					if (count == 4){
+						hand[1][count] = w4[5];
+						hand[2][count] = w4[4];
+						hand[3][count] = w4[5];
+						hand[4][count] = w4[6];
+						hand[5][count] = w4[7];
+						hand[6][count] = w4[8];
+						hand[7][count] = w4[7];
+					}
+					if (count == 5){
+						hand[1][count] = w5[4];
+						hand[2][count] = w5[4];
+						hand[3][count] = w5[5];
+						hand[4][count] = w5[6];
+						hand[5][count] = w5[7];
+						hand[6][count] = w5[8];
+						hand[7][count] = w5[8];
+					}
+				count++;
+				}
+				
+				var whatHand = 1;
+				var whatCard;
+				while (whatHand <= 7){
+					whatCard = 1;
+					while (whatCard <= 5){
+						var valTmp;
+						var typTmp;
+						valTmp = hand[whatHand][whatCard].substring(0,1);
+						typTmp = hand[whatHand][whatCard].substring(1,2);
+						if (hand[whatHand][whatCard] == "CH"){
+							valTmp = -1;
+							typTmp = "c";
+						}
+						if (hand[whatHand][whatCard] == "LE"){
+							valTmp = -2;
+							typTmp = "l";
+						}
+						if (hand[whatHand][whatCard].substring(0,1) == "T"){
+							valTmp = 10;
+							typTmp = hand[whatHand][whatCard].substring(1,2);
+						}
+						if (hand[whatHand][whatCard].substring(0,1) == "J") {
+							if (hand[whatHand][whatCard] == "J0"){
+								valTmp = 0;
+								typTmp = "j";
+							} else {
+								valTmp = 11;
+								typTmp = hand[whatHand][whatCard].substring(1,2);
+							}
+						}
+						if (hand[whatHand][whatCard].substring(0,1) == "Q"){
+							valTmp = 12;
+							typTmp = hand[whatHand][whatCard].substring(1,2);
+						}
+						if (hand[whatHand][whatCard].substring(0,1) == "K"){
+							valTmp = 13;
+							typTmp = hand[whatHand][whatCard].substring(1,2);
+						}
+						if (hand[whatHand][whatCard].substring(0,1) == "A"){
+							valTmp = 14;
+							typTmp = hand[whatHand][whatCard].substring(1,2);
+						}
+						cardVal[whatHand][whatCard] = valTmp;
+						cardTyp[whatHand][whatCard] = typTmp;
+					whatCard++
+					}
+				whatHand++;
+				}
+			}
+			
+			function rankHand(whatHand){
+				var whatCard = 1;
+				var otherCard = 1;
+				
+				var tmpHnd = {
+							v:{ c1:"", c2:"", c3:"", c4:"", c5:"" },
+							t:{ c1:"", c2:"", c3:"", c4:"", c5:"" },
+							numSameValue:{
+								c1:0, c2:0, c3:0, c4:0, c5:0 
+								},
+							numSameType:{
+								c1:0, c2:0, c3:0, c4:0, c5:0 
+								}
+					};
+				var tmpRnk = { 
+					lowCardValue:0,
+					highCardValue:0,
+					numSameValue:0,
+					numSameType:0,
+					numValuePairs:0,
+					Nothin:true,
+					OnePair:false,
+					TwoPair:false,
+					ThreeOfAkind:false,
+					Straight:false,
+					Flush:false,
+					FullHouse:false,
+					FourOfAkind:false,
+					StraightFlush:false,
+					RoyalFlush:false,
+					FiveOfAkind:false
+					}
+					
+				while (whatCard <= 5){
+					var crd = "c" + whatCard;
+					tmpHnd.v[crd] = cardVal[whatHand][whatCard];
+					tmpHnd.t[crd] = cardTyp[whatHand][whatCard];
+				whatCard++
+				}
+				
+				var crd1 = "c";
+				var crd2 = "c";
+				var tmpV;
+				var tmpT;
+				var loopCnt1;
+				var loopCnt2;
+				for (loopCnt1 = 1; loopCnt1 <= 4; loopCnt1++){
+					for (loopCnt2 = loopCnt1 + 1; loopCnt2 <= 5; loopCnt2++){
+						crd1 = "c" + loopCnt1;
+						crd2 = "c" + loopCnt2;
+						if (tmpHnd.v[crd1] > tmpHnd.v[crd2]){
+							tmpV = tmpHnd.v[crd1];
+							tmpT = tmpHnd.t[crd1];
+							tmpHnd.v[crd1] = tmpHnd.v[crd2];
+							tmpHnd.t[crd1] = tmpHnd.t[crd2];
+							tmpHnd.v[crd2] = tmpV;
+							tmpHnd.t[crd2] = tmpT;
+						}
+					}
+				}
+				tmpRnk.lowCardValue = tmpHnd.v["c1"];
+				tmpRnk.highCardValue = tmpHnd.v["c5"];
+				for (loopCnt1 = 1; loopCnt1 <= 4; loopCnt1++){
+					for (loopCnt2 = loopCnt1 + 1; loopCnt2 <= 5; loopCnt2++){
+						crd1 = "c" + loopCnt1;
+						crd2 = "c" + loopCnt2;
+						if (tmpHnd.v[crd1] == tmpHnd.v[crd2]){
+							tmpRnk.Nothin = false;
+							tmpHnd.numSameValue[crd1]++;
+							tmpHnd.numSameValue[crd2]++;
+						}
+						if (tmpHnd.t[crd1] == tmpHnd.t[crd2]){
+							tmpRnk.Nothin = false;
+							tmpHnd.numSameType[crd1]++;
+							tmpHnd.numSameType[crd2]++;
+						}
+					}
+				}
+			}
+			
+			function judgeHands(){
+				readHands();
+				var hndCount = 1;
+				
+				while (hndCount <= 7){
+					rankHand(hndCount);
+				hndCount++
+				}
+			}
+			
+		window.onload = function(){
+			populateTable();
+		}
+		</script>
+	</body>
+</html>
