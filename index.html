@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 	<head>
 	<meta property="og:title" content="PokerJack Slot Machine" />
@@ -343,7 +342,23 @@
 		var fastEnoughWheel4 = false;
 		var wheelIntervalWheel4 = setInterval(animateSpinWheel4, 1);
 		clearInterval("wheelIntervalWheel4");
-		
+
+		var overideWheels = false;
+		if (overideWheels){
+			var overideWheel1Pos = 9;
+			var overideWheel2Pos = 11;
+			var overideWheel3Pos = 11;
+			var overideWheel4Pos = 7;
+			var overideWheel5Pos = 3;
+		} else {
+			var overideWheel1Pos = -1;
+			var overideWheel2Pos = -1;
+			var overideWheel3Pos = -1;
+			var overideWheel4Pos = -1;
+			var overideWheel5Pos = -1;
+		}
+
+
 		function clickedButtonDeal(){
 			document.getElementById("dealBTN").style.visibility = "hidden";
 			document.getElementById("cashOutBTN").style.visibility = "visible";		
@@ -545,6 +560,8 @@
 				wheel5spinning == false ){
 				for (var handCount = 0; handCount <= 12; handCount++){
 					currentPokerResults[handCount] = checkPokerResults(currentHands[handCount], handCount);
+					var divIDtoUpdate = "poker" + (handCount + 1);
+					document.getElementById(divIDtoUpdate).innerHTML = "Poker: " + currentPokerResults[handCount];
 				}
 			}
 		}
@@ -552,24 +569,24 @@
 		function checkPokerResults(hand, whatHand){
 			var value = [0,0,0,0,0];
 			var type = ["","","","",""];
-			var bestResult = "NotSetYet";
-			var fiveOfAkind = false;
+			var bestResult = ":-( nothin'";
+			var fiveOfAkind = false; //
 			var royalFlush = false;
 			var straightFlush = false;
-			var fourOfAkind = false;
+			var fourOfAkind = false; //
 			var fullHouse = false;
-			var flush = false;
+			var flush = false; //
 			var straight = false;
-			var threeOfAkind = false;
+			var threeOfAkind = false; //
 			var twoPair = false;
-			var twoOfAkind = false;
-			var noneOfAkind = false;
-			var highCardValue = -99;
-			var lowCardValue = -99;
+			var twoOfAkind = false; //
+			var noneOfAkind = false; //
+			var highCardValue = 0;
+			var lowCardValue = 14;
 			var howManyAreTheSameValueAsMe = [0,0,0,0,1];
 			var howManyAreTheSameTypeAsMe = [0,0,0,0,1];
-			var howManyAces = -99;
-			var howManyJokers = -99;
+			var howManyAces = 0;
+			var howManyJokers = 0;
 			for (var whatCard = 0; whatCard <= 4; whatCard++){
 				value[whatCard] = hand[whatCard].substring(0,1);
 				if (value[whatCard] === "l"){ value[whatCard] = -2; }
@@ -595,6 +612,13 @@
 					}
 				}
 			}
+			for (var cardIndex = 0; cardIndex <= 4; cardIndex++){
+				if (value[cardIndex] < lowCardValue) { lowCardValue = value[cardIndex]; }
+				if (value[cardIndex] > highCardValue) { highCardValue = value[cardIndex]; }
+				if (value[cardIndex] < 0) { highCardValue = 14; lowCardValue = 0; }
+				if (value[cardIndex] == 0) { howManyJokers++; }
+				if (value[cardIndex] == 1) { howManyAces++; }
+			}
 			for (var compareCard1 = 0; compareCard1 <= 3; compareCard1++){
 				howManyAreTheSameValueAsMe[compareCard1]++;
 				howManyAreTheSameTypeAsMe[compareCard1]++;
@@ -618,11 +642,161 @@
 				}
 			}
 			if (whatHand == 3 || whatHand == 9){
-				console.log(" " + howManyAreTheSameValueAsMe + "<>" + howManyAreTheSameTypeAsMe);			
+				console.log(" [" + howManyJokers + "][" +
+							howManyAces + "] " +
+							howManyAreTheSameValueAsMe + "<>" +
+							howManyAreTheSameTypeAsMe + " " +
+							lowCardValue + "<" +
+							(highCardValue - lowCardValue) + ">" +
+							highCardValue + " " +
+							type + " | " +
+							value
+							);			
 			} else {
-				console.log(howManyAreTheSameValueAsMe + "<>" + howManyAreTheSameTypeAsMe);
+				console.log("[" + howManyJokers + "][" +
+							howManyAces + "] " +
+							howManyAreTheSameValueAsMe + "<>" +
+							howManyAreTheSameTypeAsMe + " " +
+							lowCardValue + "<" +
+							(highCardValue - lowCardValue) + ">" +
+							highCardValue + " " +
+							type + " | " +
+							value
+							);
 			}
+			var pairOwhat = ["?","?","?","?"];
+			var pairOfWhat = "?";
+			var andWhat = "?";
+			var threeOwhat = ["?","?","?"];
+			var threeOfWhat = "?";
+			var fourOfWhat = "?";
+			var fiveOfWhat = "?";
+			var straightHighCard = "?";
+			var straightLowCard = "?";
+			var flushType = "?";
+
+			if (howManyAreTheSameValueAsMe[3] == 5){ fiveOfWhat = value[3]; }
+			if (howManyAreTheSameTypeAsMe[3] == 5){ flushType = type[3]; }
+
+			fiveOfAkind = true;
+			fourOfAkind = true;
+			threeOfAkind = true;
+			twoOfAkind = true;
+			flush = true;
+
+			noneOfAkind = true;
+			for (index = 0; index <= 4; index++){
+				if (howManyAreTheSameTypeAsMe[index] != 1){
+					noneOfAkind = false;
+				}
+				if (howManyAreTheSameValueAsMe[index] != 1){
+					noneOfAkind = false;
+				}
+
+				if (howManyAreTheSameValueAsMe[index] == 2){
+					if (pairOwhat[0] == "?"){
+						pairOwhat[0] = value[index];
+						pairOfWhat = value[index];
+					} else if (pairOwhat[1] == "?"){
+						pairOwhat[1] = value[index];
+						pairOfWhat = value[index];
+					} else if (pairOwhat[2] == "?"){
+						pairOwhat[2] = value[index];
+						pairOfWhat = value[index];
+					} else if (pairOwhat[3] == "?"){
+						pairOwhat[3] = value[index];
+						pairOfWhat = value[index];
+					}
+				}
+
+				if (howManyAreTheSameValueAsMe[index] == 3){
+					if (threeOwhat[0] == "?"){
+						threeOwhat[0] = value[index];
+						threeOfWhat = value[index];
+					} else if (threeOwhat[1] == "?"){
+						threeOwhat[1] = value[index];
+						threeOfWhat = value[index];
+					} else if (threeOwhat[2] == "?"){
+						threeOwhat[2] = value[index];
+						threeOfWhat = value[index];
+					}
+				}
+
+				if (howManyAreTheSameValueAsMe[index] == 4){
+					fourOfWhat = value[index];
+				}
+
+				if (howManyAreTheSameTypeAsMe[index] <= 4){
+					flush = false;
+				}
+
+				if (howManyAreTheSameValueAsMe[index] <= 4){
+					fiveOfAkind = false;
+				}
+			} //if (whatHand == 6){debugger;}
+			if (pairOwhat[0] == 1 || pairOwhat[1] == 1 || pairOwhat[2] == 1 || pairOwhat[3] == 1){ pairOfWhat = 14; }
+			if (threeOwhat[0] == 1 || threeOwhat[1] == 1 || threeOwhat[2] == 1){ threeOfWhat = 14; }
+			if (fourOfWhat == "?"){ fourOfAkind = false; }
+			if (threeOfWhat == "?"){ threeOfAkind = false; }
+			if (pairOfWhat == "?"){ twoOfAkind = false; }
+
+			if (noneOfAkind){ bestResult = "None of a Kind"; }
+			if (twoOfAkind){ bestResult = "Pair of " +
+											valueToText(pairOfWhat) + "s"; }
+			if (twoPair){ bestResult = "Pair of " +
+										pairOfWhat + " and " +
+										andWhat; }
+			if (threeOfAkind){ bestResult = "Three " +
+											valueToText(threeOfWhat) + "s"; }
+			if (straight){ bestResult = "Straight, " +
+										straightLowCard + " through " +
+										straightHighCard; }
+			if (flush){ bestResult = typeToText(flushType) + " Flush"; }
+			if (fullHouse){ bestResult = "Full House, " +
+											threeOfWhat + " over " +
+											pairOfWhat; }
+			if (fourOfAkind){ bestResult = "Four " +
+											valueToText(fourOfWhat) + "s !"; }
+			if (straightFlush){ bestResult = "Straight Flush, " +
+											straightLowCard + " through " +
+											straightHighCard + " of " +
+											flushType; }
+			if (royalFlush){ bestResult = "Royal Flush! " +
+											straightLowCard + " through " +
+											straightHighCard + " of " +
+											flushType; }
+			if (fiveOfAkind){ bestResult = "Five " +
+											valueToText(fiveOfWhat) + "s !!!"; }
+
 		return(bestResult);
+		}
+
+		function valueToText(whatValueToConvert){
+			if (whatValueToConvert == 14){return("Ace");}
+			if (whatValueToConvert == 13){return("King");}
+			if (whatValueToConvert == 12){return("Queen");}
+			if (whatValueToConvert == 11){return("Jack");}
+			if (whatValueToConvert == 10){return("Ten");}
+			if (whatValueToConvert == 9){return("Nine");}
+			if (whatValueToConvert == 8){return("Eight");}
+			if (whatValueToConvert == 7){return("Seven");}
+			if (whatValueToConvert == 6){return("Six");}
+			if (whatValueToConvert == 5){return("Five");}
+			if (whatValueToConvert == 4){return("Four");}
+			if (whatValueToConvert == 3){return("Three");}
+			if (whatValueToConvert == 2){return("Deuce");}
+			if (whatValueToConvert == 1){return("Ace");}
+			if (whatValueToConvert == 0){return("Joker");}
+			if (whatValueToConvert == -1){return("Cherry");}
+			if (whatValueToConvert == -2){return("Lemon");}
+		}
+		function typeToText(whatTypeToConvert){
+			if (whatTypeToConvert == "c"){return("Cherry");}
+			if (whatTypeToConvert == "C"){return("Club");}
+			if (whatTypeToConvert == "D"){return("Diamond");}
+			if (whatTypeToConvert == "H"){return("Heart");}
+			if (whatTypeToConvert == "l"){return("Lemon");}
+			if (whatTypeToConvert == "S"){return("Spade");}
 		}
 
 		function clickedButtonWheel1(){
@@ -655,7 +829,11 @@
 				wheelIntervalWheel1 = setInterval(animateSpinWheel1, 1);
 				if (currentSetPixelWheel1 % 58 == 0){
 					clearInterval(wheelIntervalWheel1);
-					setWheelPosWheel1(currentSetPixelWheel1 / 58);
+					if (overideWheel1Pos < 0){
+						setWheelPosWheel1(currentSetPixelWheel1 / 58);
+					} else {
+						setWheelPosWheel1(overideWheel1Pos);
+					}
 					wheel1spinning = false;
 					readGridToRowColArray();
 				}
@@ -692,7 +870,11 @@
 				wheelIntervalWheel2 = setInterval(animateSpinWheel2, 1);
 				if (currentSetPixelWheel2 % 58 == 0){
 					clearInterval(wheelIntervalWheel2);
-					setWheelPosWheel2(currentSetPixelWheel2 / 58);
+					if (overideWheel2Pos < 0){
+						setWheelPosWheel2(currentSetPixelWheel2 / 58);
+					} else {
+						setWheelPosWheel2(overideWheel2Pos);
+					}
 					wheel2spinning = false;
 					readGridToRowColArray();
 				}
@@ -729,7 +911,11 @@
 				wheelIntervalWheel3 = setInterval(animateSpinWheel3, 1);
 				if (currentSetPixelWheel3 % 58 == 0){
 					clearInterval(wheelIntervalWheel3);
-					setWheelPosWheel3(currentSetPixelWheel3 / 58);
+					if (overideWheel3Pos < 0){
+						setWheelPosWheel3(currentSetPixelWheel3 / 58);
+					} else {
+						setWheelPosWheel3(overideWheel3Pos);
+					}
 					wheel3spinning = false;
 					readGridToRowColArray();
 				}
@@ -767,7 +953,11 @@
 				wheelIntervalWheel4 = setInterval(animateSpinWheel4, 1);
 				if (currentSetPixelWheel4 % 58 == 0){
 					clearInterval(wheelIntervalWheel4);
-					setWheelPosWheel4(currentSetPixelWheel4 / 58);
+					if (overideWheel4Pos < 0){
+						setWheelPosWheel4(currentSetPixelWheel4 / 58);
+					} else {
+						setWheelPosWheel4(overideWheel4Pos);
+					}
 					wheel4spinning = false;
 					readGridToRowColArray();
 				}
@@ -805,7 +995,11 @@
 				wheelIntervalWheel5 = setInterval(animateSpinWheel5, 1);
 				if (currentSetPixelWheel5 % 58 == 0){
 					clearInterval(wheelIntervalWheel5);
-					setWheelPosWheel5(currentSetPixelWheel5 / 58);
+					if (overideWheel5Pos < 0){
+						setWheelPosWheel5(currentSetPixelWheel5 / 58);
+					} else {
+						setWheelPosWheel5(overideWheel5Pos);
+					}
 					wheel5spinning = false;
 					readGridToRowColArray();
 				}
