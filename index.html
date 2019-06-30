@@ -574,11 +574,11 @@
 			var royalFlush = false;
 			var straightFlush = false;
 			var fourOfAkind = false; //
-			var fullHouse = false;
+			var fullHouse = false; //
 			var flush = false; //
 			var straight = false;
 			var threeOfAkind = false; //
-			var twoPair = false;
+			var twoPair = false; //
 			var twoOfAkind = false; //
 			var noneOfAkind = false; //
 			var highCardValue = 0;
@@ -680,19 +680,22 @@
 
 			fiveOfAkind = true;
 			fourOfAkind = true;
-			threeOfAkind = true;
-			twoOfAkind = true;
+			fullHouse = true;
 			flush = true;
+			threeOfAkind = true;
+			twoPair = true;
+			twoOfAkind = true;
 
 			noneOfAkind = true;
 			for (index = 0; index <= 4; index++){
+				// CHECK noneOfAkind
 				if (howManyAreTheSameTypeAsMe[index] != 1){
 					noneOfAkind = false;
 				}
 				if (howManyAreTheSameValueAsMe[index] != 1){
 					noneOfAkind = false;
 				}
-
+				// CHECK twoOfAkind
 				if (howManyAreTheSameValueAsMe[index] == 2){
 					if (pairOwhat[0] == "?"){
 						pairOwhat[0] = value[index];
@@ -708,7 +711,7 @@
 						pairOfWhat = value[index];
 					}
 				}
-
+				// CHECK threeOfAkind
 				if (howManyAreTheSameValueAsMe[index] == 3){
 					if (threeOwhat[0] == "?"){
 						threeOwhat[0] = value[index];
@@ -721,31 +724,82 @@
 						threeOfWhat = value[index];
 					}
 				}
-
+				// CHECK fourOfAkind
 				if (howManyAreTheSameValueAsMe[index] == 4){
 					fourOfWhat = value[index];
 				}
-
+				// CHECK flush
 				if (howManyAreTheSameTypeAsMe[index] <= 4){
 					flush = false;
 				}
-
+				// CHECK fiveOfAkind
 				if (howManyAreTheSameValueAsMe[index] <= 4){
 					fiveOfAkind = false;
 				}
-			} //if (whatHand == 6){debugger;}
+			}
 			if (pairOwhat[0] == 1 || pairOwhat[1] == 1 || pairOwhat[2] == 1 || pairOwhat[3] == 1){ pairOfWhat = 14; }
 			if (threeOwhat[0] == 1 || threeOwhat[1] == 1 || threeOwhat[2] == 1){ threeOfWhat = 14; }
 			if (fourOfWhat == "?"){ fourOfAkind = false; }
 			if (threeOfWhat == "?"){ threeOfAkind = false; }
 			if (pairOfWhat == "?"){ twoOfAkind = false; }
+			// CHECK twoPair
+			if (twoOfAkind){
+				var tmpValue = value.slice(0);
+				var howManyOfMe = [0,0,0,0,0];
+				andWhat = "?";
+				for (index = 0; index <= 4; index++){
+					if (tmpValue[index] == 0 || tmpValue[index] == pairOfWhat){
+						tmpValue[index] = 15;
+					}
+					if (tmpValue[index] == 1){
+						tmpValue[index] = 14;
+					}
+					if (tmpValue[index] < 15){
+						for (next = index + 1; next <= 4; next++){
+							if (tmpValue[index] == tmpValue[next]){
+								howManyOfMe[index]++;
+							}
+						}
+						if (howManyOfMe[index] > 0){ andWhat = tmpValue[index]; }
+					}
+				}
+				if (andWhat == "?"){ twoPair = false; }
+			} else {
+				twoPair = false;
+			}
+			// CHECK fullHouse
+			if (threeOfAkind){
+				var tmpValue = value.slice(0);
+				var howManyOfMe = [0,0,0,0,0];
+				andWhat = "?";
+				for (index = 0; index <= 4; index++){
+					if (tmpValue[index] == 0 || tmpValue[index] == threeOfWhat){
+						tmpValue[index] = 15;
+					}
+					if (tmpValue[index] == 1){
+						tmpValue[index] = 14;
+					}
+					if (tmpValue[index] < 15){
+						for (next = index + 1; next <= 4; next++){
+							if (tmpValue[index] == tmpValue[next]){
+								howManyOfMe[index]++;
+							}
+						}
+						if (howManyOfMe[index] > 0){ andWhat = tmpValue[index]; }
+					}
+				}
+				if (andWhat == "?"){ fullHouse = false; }
+			} else {
+				fullHouse = false;
+			}
 
+// Update bestResult
 			if (noneOfAkind){ bestResult = "None of a Kind"; }
 			if (twoOfAkind){ bestResult = "Pair of " +
 											valueToText(pairOfWhat) + "s"; }
-			if (twoPair){ bestResult = "Pair of " +
-										pairOfWhat + " and " +
-										andWhat; }
+			if (twoPair){ bestResult = "Two Pair, " +
+										valueToText(pairOfWhat) + "s and " +
+										valueToText(andWhat) + "s"; }
 			if (threeOfAkind){ bestResult = "Three " +
 											valueToText(threeOfWhat) + "s"; }
 			if (straight){ bestResult = "Straight, " +
@@ -753,8 +807,8 @@
 										straightHighCard; }
 			if (flush){ bestResult = typeToText(flushType) + " Flush"; }
 			if (fullHouse){ bestResult = "Full House, " +
-											threeOfWhat + " over " +
-											pairOfWhat; }
+											valueToText(threeOfWhat) + "s over " +
+											valueToText(andWhat) + "s"; }
 			if (fourOfAkind){ bestResult = "Four " +
 											valueToText(fourOfWhat) + "s !"; }
 			if (straightFlush){ bestResult = "Straight Flush, " +
