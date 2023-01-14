@@ -1,0 +1,89 @@
+body {
+    background-color: rgb(49, 110, 49)
+}
+
+#wheel1DIV {
+    width: 59px;
+    height: 290px;
+    border: 1px solid black;
+    background-image: url('../images/Wheel1.png');
+    background-position: 0px 0px;
+    background-size: 59px 813px;
+}
+
+#wheel1BTN {
+    width: 61px;
+    height: 29px;
+    visibility: hidden;
+}
+
+#wheel2DIV {
+    width: 59px;
+    height: 290px;
+    border: 1px solid black;
+    background-image: url('../images/Wheel2.png');
+    background-position: 0px 0px;
+    background-size: 59px 813px;
+}
+
+#wheel2BTN {
+    width: 61px;
+    height: 29px;
+    visibility: hidden;
+}
+
+#wheel3DIV {
+    width: 59px;
+    height: 290px;
+    border: 1px solid black;
+    background-image: url('../images/Wheel3.png');
+    background-position: 0px 0px;
+    background-size: 59px 813px;
+}
+
+#wheel3BTN {
+    width: 61px;
+    height: 29px;
+    visibility: hidden;
+}
+
+#wheel4DIV {
+    width: 59px;
+    height: 290px;
+    border: 1px solid black;
+    background-image: url('../images/Wheel4.png');
+    background-position: 0px 0px;
+    background-size: 59px 813px;
+}
+
+#wheel4BTN {
+    width: 61px;
+    height: 29px;
+    visibility: hidden;
+}
+
+#wheel5DIV {
+    width: 59px;
+    height: 290px;
+    border: 1px solid black;
+    background-image: url('../images/Wheel5.png');
+    background-position: 0px 0px;
+    background-size: 59px 813px;
+}
+
+#wheel5BTN {
+    width: 61px;
+    height: 29px;
+    visibility: hidden;
+}
+
+#dealBTN {
+    width: 326px;
+    height: 58px;
+}
+
+#cashOutBTN {
+    width: 326px;
+    height: 29px;
+    visibility: hidden;
+}
