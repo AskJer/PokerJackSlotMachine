@@ -582,7 +582,7 @@
 			var twoOfAkind = false; //
 			var noneOfAkind = false; //
 			var highCardValue = 0;
-			var lowCardValue = 14;
+			var lowCardValue = 15;
 			var howManyAreTheSameValueAsMe = [0,0,0,0,1];
 			var howManyAreTheSameTypeAsMe = [0,0,0,0,1];
 			var howManyAces = 0;
@@ -613,9 +613,9 @@
 				}
 			}
 			for (var cardIndex = 0; cardIndex <= 4; cardIndex++){
-				if (value[cardIndex] < lowCardValue) { lowCardValue = value[cardIndex]; }
+				if (value[cardIndex] > 1 && value[cardIndex] < lowCardValue) { lowCardValue = value[cardIndex]; }
 				if (value[cardIndex] > highCardValue) { highCardValue = value[cardIndex]; }
-				if (value[cardIndex] < 0) { highCardValue = 14; lowCardValue = 0; }
+				if (value[cardIndex] < 0) { highCardValue = 15; lowCardValue = 0; }
 				if (value[cardIndex] == 0) { howManyJokers++; }
 				if (value[cardIndex] == 1) { howManyAces++; }
 			}
@@ -682,6 +682,7 @@
 			fourOfAkind = true;
 			fullHouse = true;
 			flush = true;
+			straight = true;
 			threeOfAkind = true;
 			twoPair = true;
 			twoOfAkind = true;
@@ -792,7 +793,23 @@
 			} else {
 				fullHouse = false;
 			}
-
+			// CHECK straight
+			if (!twoOfAkind && !threeOfAkind && !fourOfAkind && !fiveOfAkind){
+				if (highCardValue - lowCardValue <= 4){
+					alert(howManyJokers + "\n" +
+							howManyAces + "\n" +
+							lowCardValue + "\n" +
+							highCardValue + "\n" +
+							twoOfAkind + "\n" +
+							threeOfAkind + "\n" +
+							fourOfAkind + "\n" +
+							fiveOfAkind);
+				} else {
+					straight = false;
+				}
+			} else {
+				straight = false;
+			}
 // Update bestResult
 			if (noneOfAkind){ bestResult = "None of a Kind"; }
 			if (twoOfAkind){ bestResult = "Pair of " +
@@ -803,8 +820,8 @@
 			if (threeOfAkind){ bestResult = "Three " +
 											valueToText(threeOfWhat) + "s"; }
 			if (straight){ bestResult = "Straight, " +
-										straightLowCard + " through " +
-										straightHighCard; }
+										valueToText(lowCardValue) + " through " +
+										valueToText(highCardValue); }
 			if (flush){ bestResult = typeToText(flushType) + " Flush"; }
 			if (fullHouse){ bestResult = "Full House, " +
 											valueToText(threeOfWhat) + "s over " +
